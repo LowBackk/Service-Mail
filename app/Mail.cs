@@ -1,0 +1,7 @@
+namespace MailNamespace
+{
+  class Mail
+  {
+
+  }
+}
