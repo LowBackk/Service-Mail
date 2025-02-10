@@ -32,7 +32,7 @@ jobs:
             # Check if the application directory exists
             if [ ! -d "$APP_DIR" ]; then
               echo "Application directory does not exist. Setting up for the first time..."
-              echo "Cloning repository with URL: $REPO_URL"$APP_DIR'
+              echo "Cloning repository with URL: $REPO_URL"
               GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_service_mail -o StrictHostKeyChecking=no"  git clone $REPO_URL $APP_DIR
             fi
 
