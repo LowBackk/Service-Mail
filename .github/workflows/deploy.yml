@@ -20,22 +20,20 @@ jobs:
 
       - name: Add server to known_hosts
         run: |
-          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/known_hosts
 
       - name: Deploy application
         run: |
           REPO_NAME="${{ github.event.repository.name }}"
           APP_DIR="../lowback/$REPO_NAME"
-          REPO_URL="git@github.com:LowBackk/$REPO_NAME.git"
+          REPO_URL="git@github.com:LowBackk/$REPO_NAME.git" 
 
           ssh -T github-action@195.35.48.166 << EOF
             # Check if the application directory exists
             if [ ! -d "$APP_DIR" ]; then
               echo "Application directory does not exist. Setting up for the first time..."
-              echo "Cloning repository with URL: $REPO_URL"
-              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_service_mail -o StrictHostKeyChecking=no" git clone $REPO_URL $APP_DIR
+              echo "Cloning repository with URL: $REPO_URL"$APP_DIR'
+              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_service_mail -o StrictHostKeyChecking=no"  git clone $REPO_URL $APP_DIR
             fi
 
             # Navigate to the app directory and update
